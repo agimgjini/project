@@ -77,7 +77,7 @@ class InfoController extends Controller
               ->get();
 
         $data_arr = array();
-
+//test
         foreach($records as $record){
             $id = $record->id;
             $customer_id = $record->customer_id;
