@@ -6,7 +6,7 @@
             @csrf
                 <input type="hidden" name="id" value="{{$customer_id}}">
                 <p><b>Communication Date:</b></p>
-                <input id="communication_date" type="date pickers" name="communication_date" class="form-control" value="{{Request::old('communication_date')}}" required>
+                <input type="date" name="communication_date" class="form-control" value="{{Request::old('communication_date')}}" required>
                 <p style="color: red">@error('communication_date') {{$message}} @enderror</p>
                 <p><b>Communication Type:</b></p>
                 <input type="text" name="communication_type" class="form-control" value="{{Request::old('communication_type')}}" required>

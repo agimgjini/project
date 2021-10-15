@@ -34,9 +34,11 @@ class CustomersController extends Controller
             $customers->telephone = $this->request->get('telephone');
             $customers->address = $this->request->get('address');
             $customers->email = $this->request->get('email');
-            $customers->save();
+            if ($customers->save()){
+                return redirect('home');
+                echo "Your entry was successful";
+            };
         };
-
         return view('newCustomer');
     }
 
@@ -87,7 +89,7 @@ class CustomersController extends Controller
               "telephone" => $telephone,
               "address" => $address,
               "email" => $email,
-              "action" => '<a href="'.route('editcustomers', ['customers' => $id]).'"><button class="btn btn-primary">Edit</button></a> <a href="customer_info/'.$id.'"><button class="btn btn-primary">View</button></a> <a href="'.route('deleteCustomer', ['customers' => $id], ['customer_info' => $this->request->customer_id]).'"><button class="btn btn-danger">Delete</button></a>'
+              "action" => '<a href="'.route('editcustomers', ['customers' => $id]).'"><button class="btn btn-primary">Edit</button></a> <a href="customer_info/'.$id.'"><button class="btn btn-primary">View</button></a>  <a href="'.route('deleteCustomer', ['customers' => $id], ['customer_info' => $this->request->customer_id]).' "><button onclick="return confirm()" class="btn btn-danger">Delete</button></a>',
           );
        }
 
@@ -129,7 +131,6 @@ class CustomersController extends Controller
 
     public function deleteCustomer(Customers $customers ){
         $customers -> delete();
-        // $this->request->customer_id -> delete();
         return redirect('/home');
     }
 }

@@ -103,7 +103,6 @@
      </table>
 
      <a href="newCustomer"><button class="btn btn-primary">Add New Customer</button></a>
-     <a href="file_uplaod"><button class="btn btn-primary">Upload a file</button></a>
 
      <!-- Script -->
      <script type="text/javascript">

@@ -17,8 +17,8 @@ class Customer_info extends Model
     ];
 
 
-    // public function customer_info(){
-    //     return $this-> hasMany(Customer_info::class ,'customer_id');
-    // }
+    public function info(){
+        return $this-> belongsTo('App/Models/Customers' ,'customer_id');
+    }
 
 }

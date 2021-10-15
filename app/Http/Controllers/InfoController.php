@@ -17,7 +17,7 @@ class InfoController extends Controller
     public function index(){
 
         // Load index view
-        return view('customer_info', ['customer_id' => $this->request->customer_info]);
+        return view('customer_info', ['customer_id' => $this->request->id]);
     }
 
     public function newinfo(){
@@ -38,6 +38,7 @@ class InfoController extends Controller
 
             if($customer_info->save()){
                 return redirect()->route('customer_info', ['customer_info' => $this->request->id]);
+                echo "Your entry was successful";
             };
 
 
@@ -70,14 +71,14 @@ class InfoController extends Controller
 
         // Fetch records
         $records = Customer_info::orderBy($columnName,$columnSortOrder)
-            //   ->where('customer_info.customer_id', 'like', '%' .$searchValue . '%')
+              //->where('customer_info.customer_id', 'like', '%' .$searchValue . '%')
               ->select('customer_info.*')
               ->skip($start)
               ->take($rowperpage)
               ->get();
 
         $data_arr = array();
-//test
+
         foreach($records as $record){
             $id = $record->id;
             $customer_id = $record->customer_id;
@@ -95,7 +96,7 @@ class InfoController extends Controller
                 "communication_scope" => $communication_scope,
                 "projected_price" => $projected_price,
                 "invoiced" => $invoiced,
-                "action" => '<a href="'.route('editinfo', ['customer_info' => $this->request->id]).'"><button class="btn btn-primary">Edit</button></a>',
+                "action" => '<a href="'.route('editinfo', ['customer_info' => $id]).'"><button class="btn btn-primary">Edit</button></a>  <a href="'.route('deleteInfo', ['customer_info' => $id]).' "><button onclick="return confirm()" class="btn btn-danger">Delete</button></a>',
             );
         }
 
@@ -133,6 +134,11 @@ class InfoController extends Controller
         };
 
         return view('editinfo', ['customer_info' => $this->request->id]);
+    }
+
+    public function deleteInfo(Customer_info $customer_info ){
+        $customer_info -> delete();
+        return redirect('customer_info');
     }
 
 }
