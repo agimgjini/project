@@ -23,7 +23,7 @@ class InfoController extends Controller
     public function newinfo(){
         if($this->request->method() == 'POST'){
             $alert = request() -> validate([
-                'communication_date' => 'required',
+                'communication_date' => 'required|date',
                 'communication_type' => 'required',
                 'communication_scope' => 'required',
                 'projected_price' => 'required|numeric'
@@ -71,7 +71,7 @@ class InfoController extends Controller
 
         // Fetch records
         $records = Customer_info::orderBy($columnName,$columnSortOrder)
-              //->where('customer_info.customer_id', 'like', '%' .$searchValue . '%')
+              //->where('customer_id', '=', $this->request->customers)
               ->select('customer_info.*')
               ->skip($start)
               ->take($rowperpage)
@@ -114,10 +114,10 @@ class InfoController extends Controller
      public function editinfo(Customer_info $customer_info){
         if($this->request->method() == 'POST'){
             $alert = request() -> validate([
-                'communication_date' => 'required',
+                'communication_date' => 'required|date',
                 'communication_type' => 'required',
                 'communication_scope' => 'required',
-                'projected_price' => 'required|numeric|between:0,999999999.99'
+                'projected_price' => 'required|numeric'
             ]);
             $customer_info->customer_id = $this->request->id;
             $customer_info->communication_date = $this->request->get('communication_date');
@@ -127,13 +127,13 @@ class InfoController extends Controller
             $customer_info->invoiced = $this->request->has('invoiced');
 
             if($customer_info->save()){
-                return redirect()->route('customer_info', ['customer_info' => $this->request->id]);
+                return redirect('customer_info/');
             };
 
 
         };
 
-        return view('editinfo', ['customer_info' => $this->request->id]);
+        return view('editinfo', ['customer_info' => $customer_info]);
     }
 
     public function deleteInfo(Customer_info $customer_info ){

@@ -28,5 +28,14 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        <table>
+            @foreach ($product as $products)
+            <tr>
+                <td>
+                    <p> {{ $products->name }}: <a href="" download="{{ $products->file_path }}"> {{ $products->file_path }} </a> </p>
+                </td>
+            </tr>
+            @endforeach
+        </table>
     </div>
 @endsection

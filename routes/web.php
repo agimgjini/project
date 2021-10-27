@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/getInfo',[InfoController::class, 'getInfo'])->name('getInfo');
     Route::post('/newinfo/{customer_id?}',[InfoController::class, 'newinfo'])->name('newinfo');
     Route::get('/newinfo/{customer_id?}',[InfoController::class, 'newinfo'])->name('newinfo');
-    Route::post('/info/{customer_info?}', [InfoController::class, 'editinfo'])->name('editinfo');
-    Route::get('/info/{customer_info?}', [InfoController::class, 'editinfo'])->name('editinfo');
+    Route::post('/editinfo/{customer_info?}', [InfoController::class, 'editinfo'])->name('editinfo');
+    Route::get('/editinfo/{customer_info?}', [InfoController::class, 'editinfo'])->name('editinfo');
     Route::get('/deleteInfo/{customer_info}',[InfoController::class, 'deleteInfo'])->name('deleteInfo');
     Route::get('users', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
     Route::post('users', [App\Http\Controllers\UsersController::class, 'update'])->name('users.update');
@@ -46,4 +46,4 @@ Route::middleware('auth')->group(function(){
     Route::get('products', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

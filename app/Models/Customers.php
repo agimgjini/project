@@ -16,7 +16,4 @@ class Customers extends Model
         'name_surename','company','telephone','address','email'
      ];
 
-    // public function customers(){
-    //     return $this->belongsTo(Customers::class ,'customer_id');
-    // }
 }
